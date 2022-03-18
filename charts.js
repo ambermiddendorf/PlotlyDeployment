@@ -96,7 +96,7 @@ function buildCharts(sample) {
     }];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: "Belly Button Samples Bar Chart",
+      title: "Top 10 Bacteria Cultures Found",
       yaxis: {
         tickmode:"array",
         ticktext: yticks
@@ -105,5 +105,29 @@ function buildCharts(sample) {
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot('bar', barData, barLayout);
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [{
+      x: sample_otu_ids,
+      y: sample_sample_values,
+      text: sample_otu_labels,
+      mode: 'markers',
+      marker: {
+        size: sample_sample_values.map(numb => numb * .6),
+        color: sample_otu_ids,
+        colorscale: 'Earth'
+      }
+
+    }];
+
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: "Bacteria Cultures Per Sample",
+      hovermode: 'closest'
+      
+    };
+
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout); 
+
   });
 }
